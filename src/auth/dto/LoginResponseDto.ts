@@ -14,15 +14,15 @@ export class LoginResponseDto {
   refresh_token: string;
 
   @ApiProperty({
-    description: 'Token type',
-    example: 'Bearer',
-    default: 'Bearer',
+    description: 'Username associated with the token',
+    example: 'TestUser',
+    default: 'TestUser',
   })
-  token_type: string;
+  username: string;
 
   @ApiProperty({
     description: 'Token expiration time in seconds',
     example: 900,
   })
-  expires_in: number;
+  fechaExpira: Date;
 }

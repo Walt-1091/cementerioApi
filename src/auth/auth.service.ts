@@ -32,12 +32,15 @@ export class AuthService {
   const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '15m' });
   const refreshToken = await this.jwtService.signAsync(payload, { expiresIn: '7d' });
   
-  return { 
-    access_token: accessToken, 
-    refresh_token: refreshToken,
-    token_type: 'Bearer',
-    expires_in: 900
-  };
+  const expiresInSeconds = 900; // 15 min
+const fechaExpira = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
+
+return {
+  access_token: accessToken,
+  refresh_token: refreshToken,
+  username: user.username,
+  fechaExpira,
+};
 }
 
   async me(user: any) {
