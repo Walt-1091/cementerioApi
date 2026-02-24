@@ -15,8 +15,7 @@ import { Request } from 'express';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
-import { User } from './user.entity/user.entity';
-import { UpdateUserPasswordDto } from 'src/models/dtos/user-password.dto';
+import { UpdateUserPasswordDto } from 'src/users/dtos/user-password.dto';
 
 
 @Controller('users')

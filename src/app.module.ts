@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { HealthModule } from './health/health.module';
 import { ConfigModule } from '@nestjs/config';
 import { NichesModule } from './niches/niches.module';
+import { PaymentsModule } from './payments/payments.module';
+import { NicheOccupantsModule } from './niche-occupants/niche-occupants.module';
 
 
 const ssl =
@@ -18,11 +20,11 @@ const ssl =
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'ep-tiny-art-ah2v2lyz-pooler.c-3.us-east-1.aws.neon.tech',
+      host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT ?? '5432'),
-      username: process.env.DB_USERNAME || 'neondb_owner',
-      password: process.env.DB_PASSWORD || 'npg_T9blMs8rkQSI',
-      database: process.env.DB_NAME || 'neondb',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV === 'development',
@@ -32,6 +34,8 @@ const ssl =
     AuthModule,
     NichesModule,
     HealthModule,
+    PaymentsModule,
+    NicheOccupantsModule
   ],
   providers: [AppService],
 })

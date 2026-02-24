@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Niche } from './nice.entity/niche.entity';
-import { CreateNicheDto } from '../models/dtos/create-niche.dto';
+import { CreateNicheDto } from './dtos/create-niche.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateNicheDto } from '../models/dtos/update-niche.dto';
+import { UpdateNicheDto } from './dtos/update-niche.dto';
 
 @Injectable()
 export class NichesService {

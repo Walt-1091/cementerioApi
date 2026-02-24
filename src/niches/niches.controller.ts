@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-import { CreateNicheDto } from '../models/dtos/create-niche.dto';
+import { CreateNicheDto } from './dtos/create-niche.dto';
 import { NichesService } from './niches.service';
-import { UpdateNicheDto } from '../models/dtos/update-niche.dto';
+import { UpdateNicheDto } from './dtos/update-niche.dto';
 
 @ApiTags('Niches')
 @Controller('niches')

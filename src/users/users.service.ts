@@ -11,17 +11,17 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private readonly passwordService: PasswordService
-  ) {}
+  ) { }
 
   async findByUsername(username: string): Promise<User | null> {
-    return await this.usersRepository.findOne({ 
-      where: { username } 
+    return await this.usersRepository.findOne({
+      where: { username }
     });
   }
 
   async findById(id: number): Promise<User | null> {
-    return await this.usersRepository.findOne({ 
-      where: { id } 
+    return await this.usersRepository.findOne({
+      where: { id }
     });
   }
 
@@ -35,19 +35,25 @@ export class UsersService {
   }
 
   async updateUser(id: number, password: string): Promise<User> {
-  const user = await this.usersRepository.findOne({ where: { id } });
-  if (!user) throw new Error('User not found');
+    const user = await this.usersRepository.findOne({ where: { id } });
+    if (!user) throw new Error('User not found');
 
-  const passwordHash = await this.passwordService.hashPassword(password);
+    const passwordHash = await this.passwordService.hashPassword(password);
 
-  await this.usersRepository.update(id, {
-    password: passwordHash,
-    updatedAt: new Date(),
-  });
+    await this.usersRepository.update(id, {
+      password: passwordHash,
+      updatedAt: new Date(),
+    });
 
-  const updatedUser = await this.findById(id);
-  if (!updatedUser) throw new Error('User not found');
-  return updatedUser;
-}
+    const updatedUser = await this.findById(id);
+    if (!updatedUser) throw new Error('User not found');
+    return updatedUser;
+  }
+
+  async findByUserByEmail(email: string): Promise<User | null> {
+    return await this.usersRepository.findOne({
+      where: { email }
+    });
+  }
 
 }

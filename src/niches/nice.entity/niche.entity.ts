@@ -1,5 +1,5 @@
-import { NicheOccupantEntity } from 'src/models/niche-occupants/niche_occupants.entity';
-import { PaymentEntity } from 'src/models/payment/payment.entity';
+import { NicheOccupantEntity } from 'src/niche-occupants/niche-occupants.entity/niche_occupants.entity';
+import { PaymentEntity } from 'src/payments/payment.entity/payment.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 @Entity('niches')

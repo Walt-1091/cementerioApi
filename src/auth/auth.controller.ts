@@ -9,12 +9,14 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { SendStaticPasswordDto } from './dto/send-static-password.dto';
+import { PasswordEmailService } from './password-email.service';
 
 
 @Controller('auth')
 @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService, private readonly passwordEmail: PasswordEmailService) {}
 
   @ApiOperation({ 
         summary: 'Login user and obtain access token',
@@ -33,5 +35,11 @@ export class AuthController {
   @ApiBody({ type: LoginDto })
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
+  }
+
+  @Post('sendpassword')
+  @ApiOperation({ summary: 'Enviar contraseña estática por correo' })
+  sendStaticPassword(@Body() dto: SendStaticPasswordDto) {
+    return this.passwordEmail.sendStaticPassword(dto.email);
   }
 }

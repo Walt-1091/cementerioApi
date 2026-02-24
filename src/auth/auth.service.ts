@@ -52,4 +52,8 @@ export class AuthService {
   async validateUser(dto: { password: string }, storedHash: string) {
     return this.passwordService.verifyPassword(dto.password, storedHash);
   }
+
+  async updatePassword(userId: number, newPassword: string) {
+    return this.usersService.updateUser(userId, newPassword);
+  }
 }
