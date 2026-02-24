@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Niche } from './nice.entity/niche.entity';
-import { CreateNicheDto } from './dtos/create-niche.dto';
+import { CreateNicheDto } from '../models/dtos/create-niche.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateNicheDto } from './dtos/update-niche.dto';
+import { UpdateNicheDto } from '../models/dtos/update-niche.dto';
 
 @Injectable()
 export class NichesService {
@@ -18,15 +18,15 @@ export class NichesService {
   }
 
   async findAll(): Promise<Niche[]> {
-    return await this.nichesRepository.find({
-      relations: ['occupants', 'payments'],
+    return this.nichesRepository.find({
+      relations: { occupants: true, payments: true },
     });
   }
 
   async findOne(id: number): Promise<Niche> {
     const niche = await this.nichesRepository.findOne({
       where: { id },
-      relations: ['occupants', 'payments'],
+      relations: { occupants: true, payments: true },
     });
     
     if (!niche) {

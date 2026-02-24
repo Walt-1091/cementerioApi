@@ -1,5 +1,6 @@
+import { NicheOccupantEntity } from 'src/models/niche-occupants/niche_occupants.entity';
+import { PaymentEntity } from 'src/models/payment/payment.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-
 
 @Entity('niches')
 export class Niche {
@@ -33,21 +34,21 @@ export class Niche {
   @Column({ default: 'active' })
   status: string;
 
-  @Column({ default: true })
-  is_active: boolean;
+  @Column({ name: 'is_active', default: true })
+  isActive: boolean;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  createdAt: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  updatedAt: Date;
 
-  @Column({ type: 'date', nullable: true })
-  last_payment: Date;
+  @Column({ name: 'last_payment', type: 'date', nullable: true })
+  lastPayment: Date;
 
-//   @OneToMany(() => NicheOccupant, occupant => occupant.niche)
-//   occupants: NicheOccupant[];
+  @OneToMany(() => NicheOccupantEntity, (occupant) => occupant.niche)
+  occupants: NicheOccupantEntity[];
 
-//   @OneToMany(() => Payment, payment => payment.niche)
-//   payments: Payment[];
+  @OneToMany(() => PaymentEntity, (payment) => payment.niche)
+  payments: PaymentEntity[];
 }

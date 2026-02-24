@@ -7,11 +7,16 @@ import {
   UsePipes,
   ValidationPipe,
   HttpStatus,
+  Put,
+  Body,
+  Param,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
+import { User } from './user.entity/user.entity';
+import { UpdateUserPasswordDto } from 'src/models/dtos/user-password.dto';
 
 
 @Controller('users')
@@ -39,4 +44,9 @@ export class UserController {
     console.log('Headers:', req.headers);
     return this.userService.findByUsername(req.user.username);
   }
-}
+
+  @Put('updateuser/:id')
+  async updateUser(@Param('id') id: string, @Body() passwordDto: UpdateUserPasswordDto) {
+    return this.userService.updateUser(Number(id),  passwordDto.password);
+  }
+} 
