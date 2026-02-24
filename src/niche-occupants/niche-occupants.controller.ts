@@ -25,7 +25,7 @@ export class NicheOccupantsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Obtener ocupantes (opcional por nicheId)' })
+  @ApiOperation({ summary: 'Obtener ocupantes (opcional por nicho)' })
   @ApiQuery({ name: 'nicheId', required: false, type: Number })
   getOccupants(@Query('nicheId') nicheId?: string) {
     return this.nicheOccupantsService.getOccupants(nicheId ? +nicheId : undefined);

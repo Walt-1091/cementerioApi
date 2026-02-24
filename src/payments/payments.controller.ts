@@ -25,7 +25,7 @@ export class PaymentsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Obtener pagos (opcional por nicheId)' })
+  @ApiOperation({ summary: 'Obtener pagos por nicho' })
   @ApiQuery({ name: 'nicheId', required: false, type: Number })
   getPayments(@Query('nicheId') nicheId?: string) {
     return this.paymentsService.getPayments(nicheId ? +nicheId : undefined);

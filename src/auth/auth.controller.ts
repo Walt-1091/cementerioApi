@@ -19,16 +19,16 @@ export class AuthController {
   constructor(private readonly authService: AuthService, private readonly passwordEmail: PasswordEmailService) {}
 
   @ApiOperation({ 
-        summary: 'Login user and obtain access token',
-        description: 'Requires authentication. Click the Authorize button and enter your access token first.'
+        summary: 'Login user y obtener token de acceso',
+        description: 'Requiere autenticación. Haga clic en el botón Autorizar e ingrese su token de acceso primero.'
       })
       @ApiResponse({
         status: 200,
-        description: 'User logged in successfully'
+        description: 'Usuario autenticado exitosamente y token de acceso generado',
       })
       @ApiResponse({
         status: 400,
-        description: 'Bad Request - Invalid or missing credentials',
+        description: 'Solicitud incorrecta - Credenciales inválidas o ausentes',
       })
   @HttpCode(200)
   @Post('login')

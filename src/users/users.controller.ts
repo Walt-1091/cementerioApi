@@ -27,16 +27,16 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('access_token')
   @ApiOperation({ 
-      summary: 'Get current user information',
-      description: 'Requires authentication. Click the Authorize button and enter your access token first.'
+      summary: 'Obtener información del usuario actual',
+      description: 'Requiere autenticación. Haga clic en el botón Autorizar e ingrese su token de acceso primero.'
     })
     @ApiResponse({
       status: 200,
-      description: 'User information retrieved successfully'
+      description: 'Información del usuario obtenida exitosamente'
     })
     @ApiResponse({
       status: 401,
-      description: 'Unauthorized - Invalid or missing token',
+      description: 'No autorizado - Token inválido o ausente',
     }) 
   @Get('userinfo')
   async userInfo(@Req() req: Request & { user: any }) {
@@ -44,6 +44,19 @@ export class UserController {
     return this.userService.findByUsername(req.user.username);
   }
 
+  @ApiOperation({ summary: 'Actualizar la información de un usuario' })
+  @ApiResponse({
+    status: 200,
+    description: 'Información del usuario actualizada exitosamente'
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Solicitud incorrecta - Datos inválidos',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Usuario no encontrado',
+  })
   @Put('updateuser/:id')
   async updateUser(@Param('id') id: string, @Body() passwordDto: UpdateUserPasswordDto) {
     return this.userService.updateUser(Number(id),  passwordDto.password);
