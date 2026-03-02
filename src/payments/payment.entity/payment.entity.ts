@@ -29,6 +29,9 @@ export class PaymentEntity {
   @Column({ name: 'document_name', type: 'varchar', length: 255, nullable: true })
   documentName: string | null;
 
+  @Column({ name: 'document_type', type: 'varchar', length: 50, nullable: true })
+  documentType: string | null;
+
   @Column({ name: 'document_size', type: 'int', nullable: true })
   documentSize: number | null;
 
