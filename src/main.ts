@@ -24,14 +24,14 @@ async function bootstrap() {
         name: 'Authorization',
         in: 'header',
       },
-      'access_token', 
+      'access_token',
     )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  
+
   SwaggerModule.setup('docs', app, document, {
-    swaggerOptions: { 
+    swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: 'alpha',
       operationsSorter: 'alpha',
@@ -42,8 +42,11 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.enableCors({
-    origin: 'http://localhost:5173',
-    credentials: true, 
+    origin: [
+      'http://localhost:5173',
+      'https://cementerioui.onrender.com',
+    ],
+    credentials: true,
   });
   await app.listen(port);
 }
