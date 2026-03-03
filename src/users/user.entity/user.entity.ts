@@ -25,9 +25,9 @@ export class User {
   @Column({ type: 'boolean', default: true })
   is_Active: boolean;
 
-  @CreateDateColumn({ name: 'createdAt' })
+  @CreateDateColumn({ name: 'createdat' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updatedAt' })
+  @UpdateDateColumn({ name: 'updatedat' })
   updatedAt: Date;
 }
