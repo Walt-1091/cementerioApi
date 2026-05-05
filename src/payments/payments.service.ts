@@ -18,8 +18,8 @@ export class PaymentsService {
       documentName: createDto.documentName ?? null,
       documentSize: createDto.documentSize ?? null,
       documentMimeType: createDto.documentMimeType ?? null,
-      document: createDto.documentBase64 ? this.base64ToBuffer(createDto.documentBase64) : null,
-      // paidAt es CreateDateColumn => lo pone la DB/TypeORM
+      documentType: createDto.documentType ?? null,
+      document: createDto.documentBase64 ? this.base64ToBuffer(createDto.documentBase64) : null
     });
 
     return this.paymentsRepository.save(payment);
@@ -33,6 +33,7 @@ export class PaymentsService {
     if (updateDto.documentName !== undefined) existing.documentName = updateDto.documentName ?? null;
     if (updateDto.documentSize !== undefined) existing.documentSize = updateDto.documentSize ?? null;
     if (updateDto.documentMimeType !== undefined) existing.documentMimeType = updateDto.documentMimeType ?? null;
+    if (updateDto.documentType !== undefined) existing.documentType = updateDto.documentType ?? null;
     if (updateDto.documentBase64 !== undefined) {
       existing.document = updateDto.documentBase64 ? this.base64ToBuffer(updateDto.documentBase64) : null;
     }
@@ -55,7 +56,6 @@ export class PaymentsService {
 
   private base64ToBuffer(base64: string): Buffer {
     try {
-      // por si viene con prefijo data:...;base64,
       const cleaned = base64.includes('base64,') ? base64.split('base64,')[1] : base64;
       return Buffer.from(cleaned, 'base64');
     } catch {

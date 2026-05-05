@@ -13,6 +13,11 @@ export class UpdatePaymentDto {
   @IsString()
   documentName?: string;
 
+  @ApiPropertyOptional({ example: 'Anualidad' })
+  @IsOptional()
+  @IsString()
+  documentType?: string;
+
   @ApiPropertyOptional({ example: 123456 })
   @IsOptional()
   @IsInt()
