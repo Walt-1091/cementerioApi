@@ -26,6 +26,15 @@ export class NicheOccupantEntity {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  lastName: string;
+
+  @Column({ name: 'fechaNacimiento', type: 'timestamp' })
+  fechaNacimiento: Date;
+
+  @Column({ name: 'fechaDefuncion', type: 'timestamp' })
+  fechaDefuncion: Date;
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;
 
