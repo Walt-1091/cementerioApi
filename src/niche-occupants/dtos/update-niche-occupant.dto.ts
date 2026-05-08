@@ -23,10 +23,10 @@ export class UpdateNicheOccupantDto {
   @ApiPropertyOptional({ example: '05/05/1980', description: 'Fecha de nacimiento del ocupante (opcional)' })
   @IsOptional()
   @IsDateString()
-  fechaNacimiento?: string;
+  fechaNacimiento?: Date;
 
   @ApiPropertyOptional({ example: '05/05/2026', description: 'Fecha de defunción del ocupante (opcional)' })
   @IsOptional()
   @IsDateString()
-  fechaDefuncion?: string;
+  fechaDefuncion?: Date;
 }

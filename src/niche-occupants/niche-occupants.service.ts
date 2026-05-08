@@ -17,6 +17,9 @@ export class NicheOccupantsService {
     const occupant = this.occupantsRepository.create({
       nicheId: dto.nicheId,
       name: dto.name,
+      lastName: dto.lastName,
+      fechaNacimiento: dto.fechaNacimiento,
+      fechaDefuncion: dto.fechaDefuncion,
     });
 
     return this.occupantsRepository.save(occupant);
@@ -28,6 +31,9 @@ export class NicheOccupantsService {
 
     if (dto.nicheId !== undefined) existing.nicheId = dto.nicheId;
     if (dto.name !== undefined) existing.name = dto.name;
+    if (dto.lastName !== undefined) existing.lastName = dto.lastName;
+    if (dto.fechaNacimiento !== undefined) existing.fechaNacimiento = dto.fechaNacimiento;
+    if (dto.fechaDefuncion !== undefined) existing.fechaDefuncion = dto.fechaDefuncion;
 
     return this.occupantsRepository.save(existing);
   }

@@ -17,11 +17,11 @@ export class CreateNicheOccupantDto {
   @MaxLength(255)
   lastName: string;
 
-  @ApiProperty({ example: 'Juan Pérez', description: 'Nombre del ocupante' })
+  @ApiProperty({ example: '05/05/1980', description: 'Fecha de nacimiento del ocupante' })
   @IsDateString()
-  fechaNacimiento: string;
+  fechaNacimiento: Date;
 
-  @ApiProperty({ example: 'Juan Pérez', description: 'Nombre del ocupante' })
+  @ApiProperty({ example: '05/05/2026', description: 'Fecha de defunción del ocupante' })
   @IsDateString()
-  fechaDefuncion: string;
+  fechaDefuncion: Date;
 }
