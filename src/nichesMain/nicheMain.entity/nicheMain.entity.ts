@@ -27,6 +27,6 @@ export class NicheMain {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Date;
 
-  @OneToMany(() => Niche, (niche) => niche.nicheMainId)
+  @OneToMany(() => Niche, (niche) => niche.nichesMain)
   niches: Niche[];
 }

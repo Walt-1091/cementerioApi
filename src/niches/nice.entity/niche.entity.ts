@@ -8,8 +8,8 @@ export class Niche {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => NicheMain, (nicheMain) => nicheMain.id, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'niche_id' })
+  @ManyToOne(() => NicheMain, (nicheMain) => nicheMain.niches, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'nicheMainId' })
   nichesMain: NicheMain;
 
   @Column({ type: 'int', nullable: true  })

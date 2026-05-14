@@ -1,20 +1,16 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Niche } from './nice.entity/niche.entity';
 import { CreateNicheDto } from './dtos/create-niche.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateNicheDto } from './dtos/update-niche.dto';
-import { EntityMapper } from 'src/common/utils/entity-mapper.util';
-import { Mapper } from '@automapper/core';
 
 @Injectable()
 export class NichesService {
   constructor(
-      @InjectRepository(Niche)
-      private nichesRepository: Repository<Niche>,
-      @Inject('MAPPER')
-      private readonly mapper: Mapper
-    ) {}
+    @InjectRepository(Niche)
+    private nichesRepository: Repository<Niche>,
+  ) { }
 
   async create(createNicheDto: CreateNicheDto): Promise<Niche> {
     const niche = this.nichesRepository.create(createNicheDto);
@@ -32,18 +28,18 @@ export class NichesService {
       where: { id },
       relations: { occupants: true, payments: true },
     });
-    
+
     if (!niche) {
       throw new NotFoundException(`Niche with ID ${id} not found`);
     }
-    
+
     return niche;
   }
 
   async update(id: number, updateNicheDto: UpdateNicheDto): Promise<Niche> {
     const existing = await this.findOne(id);
-    EntityMapper.applyUpdates(existing, updateNicheDto);
-    return this.nichesRepository.save(existing);
+    const updated = Object.assign(existing, updateNicheDto);
+    return this.nichesRepository.save(updated);
   }
 
   async remove(id: number): Promise<void> {

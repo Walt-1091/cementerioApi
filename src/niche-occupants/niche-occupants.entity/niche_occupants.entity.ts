@@ -16,7 +16,7 @@ export class NicheOccupantEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'niche_id', type: 'int' })
+  @Column({ name: 'niche_id', type: 'int', nullable: true  })
   nicheId: number;
 
   @ManyToOne(() => Niche, (niche) => niche.occupants, { onDelete: 'CASCADE' })

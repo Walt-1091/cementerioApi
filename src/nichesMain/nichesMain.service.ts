@@ -9,28 +9,22 @@ import { CreateNicheMainDto } from './dtos/create-nicheMain.dto';
 export class NichesMainService {
   constructor(
       @InjectRepository(NicheMain)
-      private nichesRepository: Repository<NicheMain>,
+      private nichesMainRepository: Repository<NicheMain>,
     ) {}
 
   async create(createNicheMainDto: CreateNicheMainDto): Promise<NicheMain> {
-    const niche = this.nichesRepository.create(createNicheMainDto);
-    return await this.nichesRepository.save(niche);
+    const niche = this.nichesMainRepository.create(createNicheMainDto);
+    return await this.nichesMainRepository.save(niche);
   }
 
   async findAll(): Promise<NicheMain[]> {
-  return this.nichesRepository.find({
-    where: {
-      status: 'libre',
-      niches: {
-        isActive: false,
-      },
-    },
+  return this.nichesMainRepository.find({
     relations: { niches: true },
   });
 }
 
   async findOne(id: number): Promise<NicheMain> {
-    const niche = await this.nichesRepository.findOne({
+    const niche = await this.nichesMainRepository.findOne({
       where: { id },
       relations: { niches: true },
     });
@@ -43,8 +37,8 @@ export class NichesMainService {
   }
 
   async update(id: number, updateNicheMainDto: UpdateNicheMainDto): Promise<NicheMain> {
-    await this.findOne(id);
-    await this.nichesRepository.update(id, updateNicheMainDto);
-    return this.findOne(id);
+    const existing = await this.findOne(id);
+    const updated = Object.assign(existing, updateNicheMainDto);
+    return this.nichesMainRepository.save(updated);
   }
 }

@@ -10,29 +10,29 @@ import { NichesMainService } from './nichesMain.service';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access_token')
 export class NichesMainController {
-  constructor(private readonly nichesService: NichesMainService) {}
+  constructor(private readonly nichesMainService: NichesMainService) {}
 
   @Post()
   @ApiOperation({ summary: 'Crear un nuevo nicho' })
   create(@Body() createNicheMainDto: CreateNicheMainDto) {
-    return this.nichesService.create(createNicheMainDto);
+    return this.nichesMainService.create(createNicheMainDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Obtener todos los nichos' })
   findAll() {
-    return this.nichesService.findAll();
+    return this.nichesMainService.findAll();
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Obtener un nicho por ID' })
   findOne(@Param('id') id: number) {
-    return this.nichesService.findOne(id);
+    return this.nichesMainService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Actualizar un nicho' })
   update(@Param('id') id: number, @Body() updateNicheMainDto: UpdateNicheMainDto) {
-    return this.nichesService.update(id, updateNicheMainDto);
+    return this.nichesMainService.update(id, updateNicheMainDto);
   }
 }

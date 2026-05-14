@@ -35,4 +35,10 @@ export class NichesController {
   update(@Param('id') id: number, @Body() updateNicheDto: UpdateNicheDto) {
     return this.nichesService.update(id, updateNicheDto);
   }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Eliminar un nicho' })
+  remove(@Param('id') id: number) {
+    return this.nichesService.remove(id);
+  }
 }
