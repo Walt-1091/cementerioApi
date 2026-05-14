@@ -10,6 +10,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { NicheOccupantsModule } from './niche-occupants/niche-occupants.module';
 import { NichesMainModule } from './nichesMain/nichesMain.module';
 import { MapperProvider } from './common/mapper/mapper.provider';
+import { MapperModule } from './common/mapper/mapper.module';
 
 
 const ssl =
@@ -38,11 +39,12 @@ const ssl =
     HealthModule,
     PaymentsModule,
     NicheOccupantsModule,
-    NichesMainModule
+    NichesMainModule,
+    MapperModule
   ],
-  providers: [AppService, MapperProvider],
+  providers: [AppService],
   exports: [
-    MapperProvider,
+    MapperModule,
   ],
 })
 export class AppModule {}
