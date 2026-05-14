@@ -1,18 +1,10 @@
-import { IsString, IsEmail, IsOptional, IsBoolean, isNumber, IsNumber } from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateNicheDto {
+export class CreateNicheMainDto {
   @ApiProperty({ example: 'A-001' })
   @IsString()
   number: string;
-
-  @ApiProperty({ example: 'Juan Pérez' })
-  @IsString()
-  owner: string;
-
-  @ApiProperty({ example: '1' })
-  @IsNumber()
-  nicheMainId: number;
 
   @ApiProperty({ example: 'Perpetuo', required: false })
   @IsString()
@@ -33,9 +25,4 @@ export class CreateNicheDto {
   @IsString()
   @IsOptional()
   status?: string;
-
-  @ApiProperty({ default: true, required: false })
-  @IsBoolean()
-  @IsOptional()
-  is_active?: boolean;
 }

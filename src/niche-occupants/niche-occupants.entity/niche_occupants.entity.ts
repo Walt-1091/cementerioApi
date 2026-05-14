@@ -26,13 +26,13 @@ export class NicheOccupantEntity {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ name:"lastName", type: 'varchar', length: 50, nullable: true })
   lastName: string;
 
-  @Column({ name: 'fechaNacimiento', type: 'timestamp' })
+  @Column({ name: 'fechaNacimiento', type: 'timestamp', nullable: true  })
   fechaNacimiento: Date;
 
-  @Column({ name: 'fechaDefuncion', type: 'timestamp' })
+  @Column({ name: 'fechaDefuncion', type: 'timestamp', nullable: true  })
   fechaDefuncion: Date;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

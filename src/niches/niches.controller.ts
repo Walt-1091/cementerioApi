@@ -26,13 +26,13 @@ export class NichesController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Obtener un nicho por ID' })
-  findOne(@Param('id') id: string) {
-    return this.nichesService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.nichesService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Actualizar un nicho' })
-  update(@Param('id') id: string, @Body() updateNicheDto: UpdateNicheDto) {
-    return this.nichesService.update(+id, updateNicheDto);
+  update(@Param('id') id: number, @Body() updateNicheDto: UpdateNicheDto) {
+    return this.nichesService.update(id, updateNicheDto);
   }
 }

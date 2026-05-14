@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { NichesModule } from './niches/niches.module';
 import { PaymentsModule } from './payments/payments.module';
 import { NicheOccupantsModule } from './niche-occupants/niche-occupants.module';
+import { NichesMainModule } from './nichesMain/nichesMain.module';
 
 
 const ssl =
@@ -35,7 +36,8 @@ const ssl =
     NichesModule,
     HealthModule,
     PaymentsModule,
-    NicheOccupantsModule
+    NicheOccupantsModule,
+    NichesMainModule
   ],
   providers: [AppService],
 })

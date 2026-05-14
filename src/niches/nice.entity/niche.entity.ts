@@ -1,11 +1,19 @@
 import { NicheOccupantEntity } from 'src/niche-occupants/niche-occupants.entity/niche_occupants.entity';
+import { NicheMain } from 'src/nichesMain/nicheMain.entity/nicheMain.entity';
 import { PaymentEntity } from 'src/payments/payment.entity/payment.entity';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('niches')
 export class Niche {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ManyToOne(() => NicheMain, (nicheMain) => nicheMain.id, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'niche_id' })
+  nichesMain: NicheMain;
+
+  @Column({ type: 'int', nullable: true  })
+  nicheMainId: number;
 
   @Column({ unique: true })
   number: string;

@@ -1,10 +1,20 @@
-import { IsString, IsEmail, IsOptional, IsBoolean } from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsBoolean, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateNicheDto {
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  @IsOptional()
+  id: number;
+
   @ApiProperty({ example: 'A-001' })
   @IsString()
   number: string;
+
+  @ApiProperty({ example: '1' })
+  @IsNumber()
+  @IsOptional()
+  nicheMainId: number;
 
   @ApiProperty({ example: 'Juan Pérez' })
   @IsString()
