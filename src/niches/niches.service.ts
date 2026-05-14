@@ -1,16 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Niche } from './nice.entity/niche.entity';
 import { CreateNicheDto } from './dtos/create-niche.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateNicheDto } from './dtos/update-niche.dto';
 import { EntityMapper } from 'src/common/utils/entity-mapper.util';
+import { Mapper } from '@automapper/core';
 
 @Injectable()
 export class NichesService {
   constructor(
       @InjectRepository(Niche)
       private nichesRepository: Repository<Niche>,
+      @Inject('MAPPER')
+      private readonly mapper: Mapper
     ) {}
 
   async create(createNicheDto: CreateNicheDto): Promise<Niche> {
