@@ -8,9 +8,9 @@ import { CreateNicheMainDto } from './dtos/create-nicheMain.dto';
 @Injectable()
 export class NichesMainService {
   constructor(
-      @InjectRepository(NicheMain)
-      private nichesMainRepository: Repository<NicheMain>,
-    ) {}
+    @InjectRepository(NicheMain)
+    private nichesMainRepository: Repository<NicheMain>,
+  ) { }
 
   async create(createNicheMainDto: CreateNicheMainDto): Promise<NicheMain> {
     const niche = this.nichesMainRepository.create(createNicheMainDto);
@@ -18,21 +18,26 @@ export class NichesMainService {
   }
 
   async findAll(): Promise<NicheMain[]> {
-  return this.nichesMainRepository.find({
-    relations: { niches: true },
-  });
-}
+    return this.nichesMainRepository.find({
+      relations: {
+        niches: {
+          occupants: true,
+          payments: true,
+        },
+      },
+    });
+  }
 
   async findOne(id: number): Promise<NicheMain> {
     const niche = await this.nichesMainRepository.findOne({
       where: { id },
       relations: { niches: true },
     });
-    
+
     if (!niche) {
       throw new NotFoundException(`Niche with ID ${id} not found`);
     }
-    
+
     return niche;
   }
 
