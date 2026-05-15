@@ -24,6 +24,12 @@ export class NichesMainController {
     return this.nichesMainService.findAll();
   }
 
+  @Get('available')
+  @ApiOperation({ summary: 'Obtener todos los nichos disponibles' })
+  findAllAvailable() {
+    return this.nichesMainService.findAllAvailable();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener un nicho por ID' })
   findOne(@Param('id') id: number) {

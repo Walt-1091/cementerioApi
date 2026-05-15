@@ -4,6 +4,7 @@ import { Niche } from './nice.entity/niche.entity';
 import { CreateNicheDto } from './dtos/create-niche.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateNicheDto } from './dtos/update-niche.dto';
+import { NicheMain } from 'src/nichesMain/nicheMain.entity/nicheMain.entity';
 
 @Injectable()
 export class NichesService {
@@ -13,8 +14,19 @@ export class NichesService {
   ) { }
 
   async create(createNicheDto: CreateNicheDto): Promise<Niche> {
-    const niche = this.nichesRepository.create(createNicheDto);
-    return await this.nichesRepository.save(niche);
+    return await this.nichesRepository.manager.transaction(async (manager) => {
+
+      const niche = manager.create(Niche, createNicheDto);
+      const savedNiche = await manager.save(niche);
+
+      await manager.update(
+        NicheMain,
+        { id: savedNiche.nicheMainId },
+        { status: 'ocupado' }
+      );
+
+      return savedNiche;
+    });
   }
 
   async findAll(): Promise<Niche[]> {

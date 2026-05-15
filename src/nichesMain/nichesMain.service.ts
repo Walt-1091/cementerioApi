@@ -28,10 +28,18 @@ export class NichesMainService {
     });
   }
 
+  async findAllAvailable(): Promise<NicheMain[]> {
+    return this.nichesMainRepository
+      .createQueryBuilder('nm')
+      .leftJoinAndSelect('nm.niches', 'n')
+      .where('n.is_active = false OR n.id IS NULL')
+      .getMany();
+  }
+
   async findOne(id: number): Promise<NicheMain> {
     const niche = await this.nichesMainRepository.findOne({
       where: { id },
-      relations: { niches: true },
+      relations: { niches: { occupants: true, payments: true } },
     });
 
     if (!niche) {
